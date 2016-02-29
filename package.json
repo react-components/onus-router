@@ -1,0 +1,29 @@
+{
+  "name": "webpack-router",
+  "version": "0.1.0",
+  "description": "compiled router using webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-components/webpack-router.git"
+  },
+  "author": "Cameron Bytheway <bytheway.cameron@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/react-components/webpack-router/issues"
+  },
+  "homepage": "https://github.com/react-components/webpack-router#readme",
+  "dependencies": {
+    "glob": "^7.0.0",
+    "history": "^2.0.0",
+    "loader-utils": "^0.2.12",
+    "object-assign": "^4.0.1",
+    "qs": "^6.1.0"
+  },
+  "peerDependencies": {
+    "react": "*"
+  }
+}
