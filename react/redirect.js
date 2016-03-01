@@ -1,7 +1,7 @@
 var React = require('react');
 var createElement = React.createElement;
 
-var Redirect = React.createClass({
+exports = module.exports = React.createClass({
   mixins: [require('./component-mixins')],
   displayName: 'Redirect',
   getDefaultProps: function() {
@@ -23,6 +23,4 @@ var Redirect = React.createClass({
     return false;
   }
 });
-
-exports = module.exports = Redirect;
-exports['default'] = Redirect;
+exports['default'] = exports;

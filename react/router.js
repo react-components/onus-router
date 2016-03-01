@@ -2,6 +2,7 @@ var React = require('react');
 var createElement = React.createElement;
 var R = require(__ROUTER__);
 var createHistory = require(__HISTORY__);
+__ENHANCERS__
 var assign = require(__ASSIGN__);
 var QS = require(__QS__);
 
@@ -28,7 +29,7 @@ var proto = {
 
     var history = self.history = (props.enhancers || []).reduce(function(history, enhancer) {
       return enhancer(history);
-    }, props.history || createHistory(props))
+    }, props.history || createHistory(props));
 
     self._unlisten = history.listen(this._onHistoryChange);
 
@@ -180,7 +181,5 @@ var proto = {
   }
 });
 
-var Router = React.createClass(proto);
-
-exports = module.exports = Router;
-exports['default'] = Router;
+exports = module.exports = React.createClass(proto);
+exports['default'] = exports;

@@ -21,6 +21,12 @@ exports.pitch = function(request) {
 
   var history = mapping[query.history] || query.history || mapping.browser;
 
+  var enhancers = query.enhancers || '';
+  if (enhancers) {
+    if (!Array.isArray(enhancers)) enhancers = [enhancers];
+    enhancers = compileEnhancers(enhancers, stringifyRequest);
+  }
+
   var cb = this.async();
 
   this.addDependency(ConstructorPath);
@@ -30,6 +36,18 @@ exports.pitch = function(request) {
       .replace(/__ROUTER__/g, stringifyRequest('!!' + loader + '!' + request))
       .replace(/__HISTORY__/g, stringifyRequest(history))
       .replace(/__QS__/g, stringifyRequest(qs))
-      .replace(/__ASSIGN__/g, stringifyRequest(assign)));
+      .replace(/__ASSIGN__/g, stringifyRequest(assign))
+      .replace(/__ENHANCERS__/g, enhancers));
   }.bind(this));
 };
+
+var enhancerMapping = {
+  'basename': require.resolve('history/lib/useBasename.js'),
+  'beforeUnload': require.resolve('history/lib/useBeforeUnload.js')
+};
+
+function compileEnhancers(enhancers, stringifyRequest) {
+  return 'createHistory = ' + enhancers.reduce(function(acc, enhancer) {
+    return '(require(' + stringifyRequest(enhancerMapping[enhancer] || enhancer) + '))(' + acc + ')';
+  }, 'createHistory') + ';';
+}

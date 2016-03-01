@@ -2,7 +2,7 @@ var React = require('react');
 var createElement = React.createElement;
 var assign = require('object-assign');
 
-var Link = React.createClass({
+exports = module.exports = React.createClass({
   mixins: [require('./component-mixins')],
   displayName: 'Link',
   contextTypes: {
@@ -88,9 +88,7 @@ var Link = React.createClass({
     return createElement('a', props);
   }
 });
-
-exports = module.exports = Link;
-exports['default'] = Link;
+exports['default'] = exports;
 
 function isLeftClickEvent(event) {
   return event.button === 0;
