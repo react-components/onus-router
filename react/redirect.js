@@ -12,7 +12,7 @@ var Redirect = React.createClass({
   componentDidMount: function() {
     this._redirect(this.props);
   },
-  componentWillRecieveProps: function(nextProps) {
+  componentWillReceiveProps: function(nextProps) {
     this._redirect(nextProps);
   },
   _redirect: function(props) {
