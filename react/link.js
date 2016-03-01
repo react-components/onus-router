@@ -14,7 +14,7 @@ var Link = React.createClass({
       onlyActiveOnIndex: false,
       className: '',
       style: {}
-    }
+    };
   },
   handleClick: function(event) {
     var props = this.props;
@@ -32,8 +32,37 @@ var Link = React.createClass({
 
     if (allowTransition) this.context.router.push(props);
   },
-  render: function() {
-    var { to, params, query, hash, state, activeClassName, activeStyle, onlyActiveOnIndex, inherit, inheritParams, inheritQuery, ...props } = this.props;
+  render: function render() {
+    var _props = this.props;
+
+    var props = _objectWithoutProperties(_props, [
+      'to',
+      'params',
+      'query',
+      'hash',
+      'state',
+      'activeClassName',
+      'activeStyle',
+      'onlyActiveOnIndex',
+      'inherit',
+      'inheritParams',
+      'inheritQuery'
+    ]);
+
+    if (isAbsoluteLink(props)) return createElement('a', props);
+
+    var to = _props.to;
+    var params = _props.params;
+    var query = _props.query;
+    var hash = _props.hash;
+    var state = _props.state;
+    var activeClassName = _props.activeClassName;
+    var activeStyle = _props.activeStyle;
+    var onlyActiveOnIndex = _props.onlyActiveOnIndex;
+    var inherit = _props.inherit;
+    var inheritParams = _props.inheritParams;
+    var inheritQuery = _props.inheritQuery;
+
     var context = this.context;
     var router = context.router;
 
@@ -69,4 +98,22 @@ function isLeftClickEvent(event) {
 
 function isModifiedEvent(event) {
   return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+}
+
+function isAbsoluteLink(props) {
+  if (/^(http|\/)/.test(props.to || '')) {
+    props.href = props.to;
+    delete props.to;
+    return true;
+  }
+}
+
+function _objectWithoutProperties(obj, keys) {
+  var target = {};
+  for (var i in obj) {
+    if (keys.indexOf(i) >= 0) continue;
+    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+    target[i] = obj[i];
+  }
+  return target;
 }
