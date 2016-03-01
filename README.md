@@ -1,2 +1,2 @@
-# webpack-router
+# onus-router
 compiled router using webpack

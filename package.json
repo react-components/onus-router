@@ -1,6 +1,6 @@
 {
-  "name": "webpack-router",
-  "version": "0.1.1",
+  "name": "onus-router",
+  "version": "0.1.0",
   "description": "compiled router using webpack",
   "main": "index.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/react-components/webpack-router.git"
+    "url": "git+https://github.com/react-components/onus-router.git"
   },
   "author": "Cameron Bytheway <bytheway.cameron@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/react-components/webpack-router/issues"
+    "url": "https://github.com/react-components/onus-router/issues"
   },
-  "homepage": "https://github.com/react-components/webpack-router#readme",
+  "homepage": "https://github.com/react-components/onus-router#readme",
   "dependencies": {
     "glob": "^7.0.0",
     "history": "^2.0.0",
