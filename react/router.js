@@ -150,6 +150,8 @@ var proto = {
         replace: this.replace,
         resolve: this.resolve,
         createHref: this.createHref,
+        createPath: this.createPath,
+        createLocation: this.createLocation,
         go: history.go,
         goBack: history.goBack,
         goForward: history.goForward,
