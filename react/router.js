@@ -128,7 +128,7 @@ var proto = {
     var state = this.state;
     var router = this.router;
 
-    var id = descriptor.id;
+    var id = descriptor.id || descriptor.to;
 
     // Make sure the parameters are equal
     var pathname = router.resolve(id, descriptor.params);
@@ -142,22 +142,30 @@ var proto = {
       !!state.componentIds[id];
   },
   getChildContext: function() {
-    var state = this.state;
+    var self = this;
     var history = this.history;
+
+    var router = {
+      push: this.push,
+      replace: this.replace,
+      resolve: this.resolve,
+      createHref: this.createHref,
+      createPath: this.createPath,
+      createLocation: this.createLocation,
+      go: history.go,
+      goBack: history.goBack,
+      goForward: history.goForward,
+      isActive: this.isActive
+    };
+
+    Object.defineProperty(router, 'location', {
+      get: function() {
+        return self.state;
+      }
+    });
+
     return {
-      router: {
-        location: state,
-        push: this.push,
-        replace: this.replace,
-        resolve: this.resolve,
-        createHref: this.createHref,
-        createPath: this.createPath,
-        createLocation: this.createLocation,
-        go: history.go,
-        goBack: history.goBack,
-        goForward: history.goForward,
-        isActive: this.isActive
-      },
+      router: router,
       activeLinkClassName: this.props.activeLinkClassName,
       activeLinkStyle: this.props.activeLinkStyle
     };
