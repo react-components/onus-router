@@ -44,12 +44,9 @@ var proto = {
       return this.history.replace(location);
     }
 
-    this.router.set(pathname);
-    this.setState(assign({
-      query: this._parseSearch(location.search)
-    }, location));
+    this.router.set(location);
   },
-  _onRouteMatch: function(components, params) {
+  _onRouteMatch: function(components, params, location) {
     if (!components) {
       console.error('No route for ' + JSON.stringify(this.router.path));
       components = [];
@@ -57,7 +54,7 @@ var proto = {
 
     var activeComponent = components[components.length - 1] || {};
 
-    this.setState({
+    this.setState(assign({
       components: components,
       activeComponent: activeComponent.i,
       activeComponentName: activeComponent.n,
@@ -65,8 +62,9 @@ var proto = {
         acc[component.i] = true;
         return acc;
       }, {}),
-      params: params || {}
-    });
+      params: params || {},
+      query: this._parseSearch(location.search)
+    }, location));
   },
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.format) this.router.format = nextProps.format;
